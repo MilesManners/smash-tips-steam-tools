@@ -1,0 +1,103 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+
+    title Stream Tools
+
+    link(rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' href='../css/style.css')
+  body
+    //.row: .col-xs-12.text-xs-center: h2 Stream Tools
+    ul.nav.nav-tabs.m-t-1
+      li.nav-item.m-l-1: a.nav-link.active(href='#manualTab' data-toggle='tab') Manual
+      li.nav-item: a.nav-link(href='#challongeTab' data-toggle='tab') Challonge
+
+    .tab-content
+      #challongeTab.tab-pane
+        form#challonge
+          .container
+            .row.m-t-1
+              .col-xs-12
+                .form-group
+                  label.m-l-1(for='apiKey') API Key
+                  input#apiKey.form-control.blend(type='text' name='apiKey' placeHolder='API Key')
+            .row
+              .col-xs-6
+                .form-group
+                  label.m-l-1(for='tournament') Tournament
+                  input#tournament.form-control.blend(type='text' name='tournament' placeHolder='Subdomain-URL')
+              .col-xs-6
+                .form-group
+                  label.m-l-1(for='state') State
+                  select#state.form-control.blend(name='state')
+                    option all
+                    option open
+                    option pending
+                    option complete
+            .row
+              .col-xs-12
+                input#bracket.btn.btn-outline-primary.pull-xs-left(type='submit' value='Challonge')
+                input#challongeUpdate.btn.btn-outline-success.pull-xs-right(type='button' value='Update Overlay')
+          .container-fluid
+            .row#preview.m-y-2
+            #challongeMatches
+      #manualTab.tab-pane.active
+        .container
+          form#manual
+            .row.m-t-1
+              .col-xs-6
+                .row
+                  .col-xs-12
+                    .form-group
+                      label.m-l-1(for='commentator1') Commentators
+                      input#commentator1.form-control.blend(type='text' name='commentator1' placeholder='Commentator 1')
+                .row
+                  .col-xs-12
+                    .form-group
+                      input#commentator2.form-control.blend(type='text' name='commentator2' placeholder='Commentator 2')
+              .col-xs-3
+                .form-group
+                  label.m-l-1(for='roundLeft') Round
+                  select#roundLeft.form-control.blend(name='roundLeft')
+                    option
+                    option Winners
+                    option Losers
+                    option Grand
+              .col-xs-3
+                .form-group
+                  label.m-l-1(for='roundRight') Label
+                  select#roundRight.form-control.blend(name='roundRight')
+                    option Friendly
+                    option Round 1
+                    option Round 2
+                    option Round 3
+                    option Round 4
+                    option Round 5
+                    option Round 6
+                    option Round 7
+                    option Round 8
+                    option Semifinals
+                    option Finals
+            .row
+              .col-xs-6
+                .form-group
+                  label.m-l-1(for='player1') Player 1
+                  input#player1.form-control.blend(type='text' name='player1' placeholder='Player 1')
+              .col-xs-6
+                .form-group
+                  label.m-l-1(for='player2') Player 2
+                  input#player2.form-control.blend(type='text' name='player2' placeholder='Player 2')
+            .row
+              .offset-xs-2.col-xs-2
+                .form-group
+                  input#player1Score.form-control.blend(type='number' name='player1Score' value='0')
+              .offset-xs-4.col-xs-2
+                .form-group
+                  input#player2Score.form-control.blend(type='number' name='player2Score' value='0')
+            .row
+              .offset-xs-3.col-xs-6
+                input#reset.btn.btn-outline-danger.pull-xs-left(type='button' value='Reset' onClick='this.form.reset()')
+                input#update.btn.btn-outline-success.pull-xs-right(type='submit' value='Manual Update')
+    script(type='text/javascript' src='../js/jquery.js' onload='$ = jQuery = module.exports')
+    script(type='text/javascript' src='../js/index.js')

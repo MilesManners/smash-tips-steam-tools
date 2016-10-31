@@ -1,0 +1,21 @@
+{
+  "name": "stream-tools",
+  "version": "1.0.0",
+  "description": "smash.tips streaming tools",
+  "main": "main.js",
+  "author": "Miles Manners",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "^1.3.5"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.4",
+    "pug": "^2.0.0-beta6",
+    "request": "^2.74.0",
+    "tether": "^1.3.7"
+  }
+}

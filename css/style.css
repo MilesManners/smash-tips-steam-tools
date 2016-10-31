@@ -1,0 +1,53 @@
+html, body {
+  background: #263238;
+  color: #fff; }
+
+.card-block {
+  padding: 10px; }
+  .card-block p:last-child {
+    margin-bottom: 0; }
+
+.card {
+  cursor: pointer; }
+  .card.selected {
+    background: #e53935; }
+
+#swap {
+  width: 75px; }
+
+input.blend {
+  background: transparent;
+  color: #fff;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #fff;
+  border-radius: 0;
+  padding-left: 0; }
+  input.blend:focus {
+    background: transparent;
+    color: #fff;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #fff;
+    border-radius: 0;
+    padding-left: 0; }
+  input.blend[type="number"] {
+    border: 1px solid white; }
+
+select.blend {
+  background: #263238;
+  color: #fff;
+  border-color: white; }
+  select.blend:focus {
+    background: #263238;
+    color: #fff;
+    border-color: white;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; }
+
+#preview .player1, #preview .player2 {
+  font-size: 2em; }
+
+/*# sourceMappingURL=style.css.map */

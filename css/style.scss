@@ -1,0 +1,76 @@
+@import "material-color";
+
+$bg: $clr-blue-grey-900;
+$text: $clr-white;
+
+html, body {
+  background: $bg;
+  color: $text;
+}
+
+.card-block {
+  padding: 10px;
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.card {
+  cursor: pointer;
+
+  &.selected {
+    background: $clr-red-600;
+  }
+}
+
+#swap {
+  width: 75px;
+}
+
+input.blend {
+  background: transparent;
+  color: $clr-white;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid $text;
+  border-radius: 0;
+  padding-left: 0;
+
+  &:focus {
+    background: transparent;
+    color: $clr-white;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid $text;
+    border-radius: 0;
+    padding-left: 0;
+  }
+
+  &[type="number"] {
+    border: 1px solid white;
+  }
+}
+
+select.blend {
+  background: $bg;
+  color: $text;
+  border-color: white;
+
+  &:focus {
+    background: $bg;
+    color: $text;
+    border-color: white;
+
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+#preview {
+  .player1, .player2 {
+    font-size: 2em;
+  }
+}
