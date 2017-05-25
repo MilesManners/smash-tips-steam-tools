@@ -1,6 +1,6 @@
 {
   "name": "stream-tools",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "smash.tips streaming tools",
   "main": "main.js",
   "author": "Miles Manners",
@@ -10,12 +10,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "electron": "^1.4.4"
+    "electron": "^1.6.8"
   },
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
-    "pug": "^2.0.0-beta6",
-    "request": "^2.74.0",
-    "tether": "^1.3.7"
+    "pug": "^2.0.0-rc.1",
+    "request": "^2.81.0",
+    "tether": "^1.4.0"
   }
 }
