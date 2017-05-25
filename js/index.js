@@ -34,6 +34,14 @@ ipcRenderer.on('get-matches-reply', (event, response) => {
   matches.append(currentRow)
 })
 
+ipcRenderer.on('increaseP1', event => {
+  $('#p1score').val(parseInt($('#p1score').val()) + 1)
+})
+
+ipcRenderer.on('increaseP2', event => {
+  $('#p2score').val(parseInt($('#p2score').val()) + 1)
+})
+
 $('.slider').on('click', '.match', function() {
   let p1name = $(this).find('.player1').text()
   let p2name = $(this).find('.player2').text()

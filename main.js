@@ -47,8 +47,14 @@ function createWindow () {
 app.on('ready', () => {
   createWindow()
 
-  globalShortcut.register('End', () => fs.writeFile(`${dir}/player1Score.txt`, ++p1Score))
-  globalShortcut.register('Home', () => fs.writeFile(`${dir}/player2Score.txt`, ++p2Score))
+  globalShortcut.register('End', () => {
+    fs.writeFile(`${dir}/player1Score.txt`, ++p1Score)
+    win.webContents.send('increaseP1')
+  })
+  globalShortcut.register('Down', () => {
+    fs.writeFile(`${dir}/player2Score.txt`, ++p2Score)
+    win.webContents.send('increaseP2')
+  })
 })
 
 // Quit when all windows are closed.
