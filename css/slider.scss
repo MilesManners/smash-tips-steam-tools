@@ -1,0 +1,99 @@
+@import "material-color";
+
+// Slider
+$slider-width: 50%;
+$slider-min-width: 500px;
+$slider-max-width: none;
+
+$anim-speed: 300ms;
+
+.slider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  visibility: hidden;
+  transition: visibility 0s $anim-speed;
+
+  // overlay layer
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    cursor: pointer;
+    transition: opacity $anim-speed;
+  }
+
+  &.is-visible {
+    visibility: visible;
+    transition: visibility 0s;
+
+    &::after {
+      opacity: .6;
+    }
+  }
+}
+
+.slider-header {
+  width: 100%;
+  background: $clr-blue-grey-800;
+  line-height: 40px;
+  z-index: 13;
+  box-shadow: 0 1px 1px rgba(#000, .08);
+
+  h1 {
+    display: inline-block;
+    font-weight: bold;
+    padding: 0 4%;
+    margin: 0;
+  }
+
+  button {
+    margin-top: 9px;
+    margin-right: 5px;
+    float: right;
+  }
+}
+
+.slider-container {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  width: $slider-width;
+  min-width: $slider-min-width;
+  max-width: $slider-max-width;
+  height: 100%;
+  top: 0;
+  z-index: 11;
+  background: $clr-blue-grey-900;
+  transition: transform $anim-speed;
+
+  right: 0;
+  transform: translate3d(100%, 0, 0);
+
+  .is-visible & {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slider-content {
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: auto;
+  z-index: 12;
+
+  &::after {
+    content: '';
+    display: block;
+    height: 30px;
+  }
+}

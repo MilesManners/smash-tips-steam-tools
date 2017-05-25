@@ -12,42 +12,71 @@ html, body {
   .card.selected {
     background: #e53935; }
 
-#swap {
-  width: 75px; }
+.matchBox {
+  padding-bottom: 10px; }
 
-input.blend {
+html, body {
+  height: 100%;
+  background: #263238;
+  color: #fff; }
+
+label {
+  display: block;
+  text-align: center; }
+
+.form-control {
+  border-color: #757575; }
+
+.form-control,
+.form-control:focus {
+  background: transparent;
+  color: #fff; }
+
+.btn {
+  cursor: pointer; }
+
+.input-group-addon,
+.btn-outline-secondary {
   background: transparent;
   color: #fff;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 1px solid #fff;
-  border-radius: 0;
-  padding-left: 0; }
-  input.blend:focus {
-    background: transparent;
-    color: #fff;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid #fff;
+  border-color: #757575;
+  cursor: pointer; }
+  .input-group-addon:hover,
+  .btn-outline-secondary:hover {
+    background: #fff;
+    color: #263238;
+    border-color: #fff; }
+
+input {
+  text-align: center; }
+  input[type='number'] {
+    font-size: 7em;
     border-radius: 0;
-    padding-left: 0; }
-  input.blend[type="number"] {
-    border: 1px solid white; }
+    border-style: none;
+    -moz-appearance: textfield; }
+    input[type='number']::-webkit-inner-spin-button, input[type='number']::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
 
-select.blend {
-  background: #263238;
-  color: #fff;
-  border-color: white; }
-  select.blend:focus {
-    background: #263238;
-    color: #fff;
-    border-color: white;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0; }
+#comm1 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0; }
 
-#preview .player1, #preview .player2 {
-  font-size: 2em; }
+#comm2 {
+  margin-top: -1px;
+  border-top-color: transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
+  #comm2:focus {
+    border-top-color: #5cb3fd; }
+
+.input-group input + input {
+  margin-left: -1px;
+  border-left-color: transparent; }
+  .input-group input + input:focus {
+    border-left-color: #5cb3fd; }
+
+.mx-auto {
+  display: block; }
 
 /*# sourceMappingURL=style.css.map */

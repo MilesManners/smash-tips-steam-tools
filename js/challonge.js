@@ -30,7 +30,7 @@ class Challonge {
             }, (response) => {
                 var data = ''
                 response.on('data', (chunk) => {data += chunk})
-                response.on('end', () => { resolve(JSON.parse(data)) })
+                response.on('end', () => { console.log(data); resolve(JSON.parse(data)) })
             }).on('error', (e) => reject(e)).end()
         })
     }

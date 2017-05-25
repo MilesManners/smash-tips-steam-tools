@@ -1,6 +1,6 @@
 @import "material-color";
 
-$bg: $clr-blue-grey-900;
+$bg:   $clr-blue-grey-900;
 $text: $clr-white;
 
 html, body {
@@ -24,53 +24,94 @@ html, body {
   }
 }
 
-#swap {
-  width: 75px;
+.matchBox {
+  padding-bottom: 10px;
 }
 
-input.blend {
+// ----------------------
+
+html, body {
+  height: 100%;
+  background: $clr-blue-grey-900;
+  color: $clr-white;
+}
+
+label {
+  display: block;
+  text-align: center;
+}
+
+.form-control {
+  border-color: $clr-grey-600;
+}
+
+.form-control,
+.form-control:focus {
   background: transparent;
   color: $clr-white;
-  border-top: none;
-  border-right: none;
-  border-left: none;
-  border-bottom: 1px solid $text;
-  border-radius: 0;
-  padding-left: 0;
+}
 
-  &:focus {
-    background: transparent;
-    color: $clr-white;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    border-bottom: 1px solid $text;
+.btn {
+  cursor: pointer;
+}
+
+.input-group-addon,
+.btn-outline-secondary {
+  background: transparent;
+  color: $clr-white;
+  border-color: $clr-grey-600;
+  cursor: pointer;
+
+  &:hover {
+    background: $clr-white;
+    color: $clr-blue-grey-900;
+    border-color: $clr-white;
+  }
+}
+
+input {
+  text-align: center;
+
+  &[type='number'] {
+    font-size: 7em;
     border-radius: 0;
-    padding-left: 0;
-  }
+    border-style: none;
 
-  &[type="number"] {
-    border: 1px solid white;
+    -moz-appearance: textfield;
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 }
 
-select.blend {
-  background: $bg;
-  color: $text;
-  border-color: white;
+#comm1 {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+#comm2 {
+  margin-top: -1px;
+  border-top-color: transparent;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
   &:focus {
-    background: $bg;
-    color: $text;
-    border-color: white;
-
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-color: #5cb3fd;
   }
 }
 
-#preview {
-  .player1, .player2 {
-    font-size: 2em;
+.input-group input + input {
+  margin-left: -1px;
+  border-left-color: transparent;
+
+  &:focus {
+    border-left-color: #5cb3fd;
   }
+}
+
+.mx-auto {
+  display: block;
 }
