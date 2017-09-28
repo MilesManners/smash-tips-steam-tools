@@ -1,10 +1,9 @@
 const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron')
-const request = require('request')
 const fs = require('fs')
 const Challonge = require('./js/challonge.js')
 
-let p1Score = 0,
-    p2Score = 0
+let p1Score = 0
+let p2Score = 0
 let dir = './streamFiles'
 let settings
 
@@ -23,8 +22,7 @@ function createWindow () {
   })
 
   fs.readFile('./settings.ini', 'utf8', (err, data) => {
-    if (!err)
-      settings = JSON.parse(data);
+    if (!err) { settings = JSON.parse(data) }
   })
 
   // and load the index.html of the app
@@ -75,10 +73,9 @@ app.on('activate', () => {
 })
 
 ipcMain.on('save-form', (event, match) => {
-  if (!fs.existsSync(dir))
-    fs.mkdirSync(dir)
+  if (!fs.existsSync(dir)) { fs.mkdirSync(dir) }
 
-  //fs.writeFile(`${dir}/commentators.txt`, `Commentary\n${match.c1Name}\n${match.c2Name}`)
+  // fs.writeFile(`${dir}/commentators.txt`, `Commentary\n${match.c1Name}\n${match.c2Name}`)
   fs.writeFile(`${dir}/round.txt`, `${match.roundLeft} ${match.roundRight}`)
   fs.writeFile(`${dir}/player1.txt`, match.p1Name)
   fs.writeFile(`${dir}/player2.txt`, match.p2Name)
@@ -88,12 +85,12 @@ ipcMain.on('save-form', (event, match) => {
   fs.writeFile(`${dir}/player2Score.txt`, p2Score)
 })
 
-showError = function(error) {
+const showError = error => {
   console.log(error)
 }
 
 class Match {
-  constructor(p1Id, p2Id, winnerId, loserId, round, state) {
+  constructor (p1Id, p2Id, winnerId, loserId, round, state) {
     this.p1Id = p1Id
     this.p2Id = p2Id
     this.winnerId = winnerId
@@ -107,41 +104,39 @@ class Match {
 // { player1, player2, state, round}
 ipcMain.on('get-matches', (event) => {
   if (!settings || !settings.apiKey || !settings.tournament) {
-    event.sender.send('get-matches-reply', {error: true, message: "Information missing from settings"})
+    event.sender.send('get-matches-reply', {error: true, message: 'Information missing from settings'})
     return
   }
 
   let chApi = new Challonge(settings.apiKey)
 
   let state = 'all'
-  if('state' in settings)
-    state = settings.state
+  if ('state' in settings) { state = settings.state }
 
   chApi.matches.index(settings.tournament, 'all')
     .then((rawMatches) => {
-      //console.log(rawMatches)
+      // console.log(rawMatches)
       chApi.participants.index(settings.tournament)
         .then((rawParticipants) => {
           let matches = rawMatches.map((x) => new Match(x.match.player1_id, x.match.player2_id, x.match.winner_id, x.match.loser_id, x.match.round, x.match.state))
 
-          let  participants = {}
-          for (i in rawParticipants)
+          let participants = {}
+          for (let i in rawParticipants) {
             participants[rawParticipants[i].participant.id] = rawParticipants[i].participant.name
-
-          let maxRound = 0,
-            minRound = 0
-
-          for (i in matches) {
-            matches[i].p1Name = participants[matches[i].p1Id]
-            matches[i].p2Name = participants[matches[i].p2Id]
-            if(matches[i].round > maxRound)
-              maxRound = matches[i].round
-            if(matches[i].round < minRound)
-              minRound = matches[i].round
           }
 
-          for (i in matches) {
-            switch(matches[i].round) {
+          let maxRound = 0
+          let minRound = 0
+
+          for (let i in matches) {
+            matches[i].p1Name = participants[matches[i].p1Id]
+            matches[i].p2Name = participants[matches[i].p2Id]
+            if (matches[i].round > maxRound) { maxRound = matches[i].round }
+            if (matches[i].round < minRound) { minRound = matches[i].round }
+          }
+
+          for (let i in matches) {
+            switch (matches[i].round) {
               case maxRound:
                 matches[i].roundLeft = 'Grand'
                 matches[i].roundRight = 'Finals'
@@ -163,7 +158,7 @@ ipcMain.on('get-matches', (event) => {
                 matches[i].roundRight = 'Semifinals'
                 break
               default:
-                if(matches[i].round > 0) {
+                if (matches[i].round > 0) {
                   matches[i].roundLeft = 'Winners'
                   matches[i].roundRight = `Round ${Math.abs(matches[i].round)}`
                 } else {
@@ -173,8 +168,7 @@ ipcMain.on('get-matches', (event) => {
             }
           }
 
-          if (state != 'all')
-            matches = matches.filter(m => m.state == state)
+          if (state !== 'all') { matches = matches.filter(m => m.state === state) }
 
           event.sender.send('get-matches-reply', matches)
         })
