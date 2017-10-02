@@ -1,0 +1,68 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+
+    title Stream Tools
+
+    link(rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet' href='../node_modules/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet' href='../css/slider.css')
+    link(rel='stylesheet' href='../css/style.css')
+  body
+    .container
+      form#form
+        .row
+          .col
+            .form-group
+              input#p1score.form-control(type='number' min='0' step='1' value='0')
+          .col
+            .form-group
+              input#p2score.form-control(type='number' min='0' step='1' value='0')
+        .row
+          .col
+            .form-group
+              .input-group
+                input#p1name.form-control(placeholder='Player 1')
+                span#swap.input-group-addon: i.fa.fa-random
+                input#p2name.form-control(placeholder='Player 2')
+                span#match-selector.input-group-addon: i.fa.fa-address-book-o
+        .row
+          .col
+            .form-group
+              label(for='comm1') Commentators
+              input#comm1.form-control
+              input#comm2.form-control
+          .col
+            .form-group
+              label(for='round-left') Round
+              .input-group
+                input#round-left.form-control(list='left-suggestions')
+                input#round-right.form-control(list='right-suggestions')
+              datalist#left-suggestions
+                option(value='Winners')
+                option(value='Losers')
+                option(value='Grand')
+              datalist#right-suggestions
+                option(value='Round 1')
+                option(value='Round 2')
+                option(value='Round 3')
+                option(value='Top 16')
+                option(value='Top 8')
+                option(value='Semifinals')
+                option(value='Finals')
+        .row
+          .col
+            button#reset.btn.btn-outline-danger.mx-auto Reset
+          .col
+            button#update.btn.btn-outline-success.mx-auto Update
+    .slider
+      .slider-container
+        header.slider-header
+          h1 Matches
+          button#settings.btn.btn-outline-secondary: i.fa.fa-lg.fa-cog.float-right
+        .slider-content
+    script(type='text/javascript' src='../node_modules/jquery/dist/jquery.js' onload='$ = jQuery = module.exports')
+    script(type='text/javascript' src='../node_modules/popper.js/dist/umd/popper.js')
+    script(type='text/javascript' src='../node_modules/bootstrap/dist/js/bootstrap.js')
+    script(type='text/javascript' src='../js/index.js')

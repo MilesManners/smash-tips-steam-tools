@@ -1,4 +1,4 @@
-const {ipcRenderer} = require('electron')
+const { ipcRenderer } = require('electron')
 const pug = require('pug')
 window.Tether = {}
 require('bootstrap')
@@ -14,8 +14,8 @@ ipcRenderer.on('get-matches-reply', (event, response) => {
 
   let currentRound = ''
   let currentRow = ''
-  for(let i in response) {
-    if(currentRound !== `${response[i].roundLeft} ${response[i].roundRight}`) {
+  for (let i in response) {
+    if (currentRound !== `${response[i].roundLeft} ${response[i].roundRight}`) {
       matches.append(currentRow)
       currentRound = `${response[i].roundLeft} ${response[i].roundRight}`
       matches.append(`<h2>${response[i].roundLeft} ${response[i].roundRight}</h2>`)
@@ -42,14 +42,14 @@ ipcRenderer.on('increaseP2', event => {
   $('#p2score').val(parseInt($('#p2score').val()) + 1)
 })
 
-$('.slider').on('click', '.match', function() {
+$('.slider').on('click', '.match', function () {
   let p1name = $(this).find('.player1').text()
   let p2name = $(this).find('.player2').text()
 
   $('#p1name').val(p1name)
   $('#p2name').val(p2name)
 
-  let round =  $(this).find('.roundLabel').text().split(' ')
+  let round = $(this).find('.roundLabel').text().split(' ')
   $('#round-left').val(round.shift())
   $('#round-right').val(round.join(' '))
 
@@ -65,8 +65,9 @@ $('#match-selector').click(e => {
 
 // Click outside slider to close it
 $('body').click(e => {
-  if ($(e.target).hasClass('slider'))
+  if ($(e.target).hasClass('slider')) {
     $('.slider').removeClass('is-visible')
+  }
 })
 
 // Click reset button to reset form
