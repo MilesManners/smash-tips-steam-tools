@@ -115,3 +115,7 @@ input {
 .mx-auto {
   display: block;
 }
+
+select option {
+  background: $bg;
+}

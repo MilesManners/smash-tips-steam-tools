@@ -11,7 +11,7 @@ class Challonge {
 
     let query = this.serialize(p)
 
-    console.log(`${this.baseHost}${this.basePath}${path}.json${query}`)
+    console.log(`${method} ${this.baseHost}${this.basePath}${path}.json${query}`)
 
     this.baseParams = {}
     this.baseParams.api_key = this.apiKey
@@ -143,7 +143,21 @@ class Challonge {
       show () { return notImplemented },
 
       // PUT /tournaments/{tournament_id}/matches/{match_id}
-      update () { return notImplemented }
+      update (tournament, match, scores, winner) {
+        let params = {
+          'match[scores_csv]': scores,
+          'match[winner_id]': winner
+        }
+
+        return new Promise((resolve, reject) =>
+          instance.request(`tournaments/${tournament}/matches/${match}`, 'PUT', params)
+            .then(resolve)
+            .catch(reject)
+        )
+      },
+
+      // POST /tournaments/{tournament_id}/matches/{match_id}
+      reopen () { return notImplemented }
     }
 
     this.matchAttachments = {

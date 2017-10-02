@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron')
 const pug = require('pug')
-window.Tether = {}
 require('bootstrap')
 
 ipcRenderer.on('get-matches-reply', (event, response) => {
@@ -24,11 +23,11 @@ ipcRenderer.on('get-matches-reply', (event, response) => {
 
     currentRow.append(pug.render(
       `.col-xl-3.col-lg-4.col-md-6.matchBox
-        .card.card-inverse.card-outline-secondary.match
+        .card.bg-dark.text-white.card-outline-secondary.match(data-id=${response[i].id})
           .card-block
             .roundLabel(hidden="hidden") ${response[i].roundLeft} ${response[i].roundRight}
-            .player1 ${response[i].p1Name}
-            .player2 ${response[i].p2Name}`))
+            .player1(data-id=${response[i].p1Id}) ${response[i].p1Name}
+            .player2(data-id=${response[i].p2Id}) ${response[i].p2Name}`))
   }
 
   matches.append(currentRow)
@@ -43,11 +42,21 @@ ipcRenderer.on('increaseP2', event => {
 })
 
 $('.slider').on('click', '.match', function () {
+  let match = $(this).data('id')
+
   let p1name = $(this).find('.player1').text()
   let p2name = $(this).find('.player2').text()
 
+  let p1Id = $(this).find('.player1').data('id')
+  let p2Id = $(this).find('.player2').data('id')
+
+  $('#form').data('id', match)
+
   $('#p1name').val(p1name)
   $('#p2name').val(p2name)
+
+  $('#p1name').data('id', p1Id)
+  $('#p2name').data('id', p2Id)
 
   let round = $(this).find('.roundLabel').text().split(' ')
   $('#round-left').val(round.shift())
@@ -70,6 +79,25 @@ $('body').click(e => {
   }
 })
 
+// Click submit results to update Challonge match
+$('#challonge').click(e => {
+  e.preventDefault()
+
+  if ($('#p1score').val() || $('#p2score').val()) {
+    let match = {
+      id: $('#form').data('id'),
+      p1Name: $('#p1name').val(),
+      p2Name: $('#p2name').val(),
+      p1Id: $('#p1name').data('id'),
+      p2Id: $('#p2name').data('id'),
+      p1Score: $('#p1score').val(),
+      p2Score: $('#p2score').val()
+    }
+
+    ipcRenderer.send('submit-match', match)
+  }
+})
+
 // Click reset button to reset form
 $('#reset').click(e => $('#form').reset())
 
@@ -78,29 +106,31 @@ $('#swap').click(() => {
   let temp = $('#p1name').val()
   $('#p1name').val($('#p2name').val())
   $('#p2name').val(temp)
+
+  temp = $('#p1name').data('id')
+  $('#p1name').data('id', $('#p2name').data('id'))
+  $('#p2name').data('id', temp)
 })
 
 // Click update to update the text files
-$('#update')
-  .click((e) => {
-    e.preventDefault()
+$('#update').click(e => {
+  e.preventDefault()
 
-    let match = {
-      p1Name: $('#p1name').val(),
-      p2Name: $('#p2name').val(),
-      roundLeft: $('#round-left').val(),
-      roundRight: $('#round-right').val(),
-      p1Score: $('#p1score').val(),
-      p2Score: $('#p2score').val()
-    }
+  let match = {
+    p1Name: $('#p1name').val(),
+    p2Name: $('#p2name').val(),
+    roundLeft: $('#round-left').val(),
+    roundRight: $('#round-right').val(),
+    p1Score: $('#p1score').val(),
+    p2Score: $('#p2score').val()
+  }
 
-    ipcRenderer.send('save-form', match)
-  })
+  ipcRenderer.send('save-form', match)
+})
 
-// Click update to update the text files
-$('#settings')
-  .click((e) => {
-    e.preventDefault()
+// Click cog to open settings
+$('#settings').click(e => {
+  e.preventDefault()
 
-    ipcRenderer.send('show-settings')
-  })
+  ipcRenderer.send('show-settings')
+})

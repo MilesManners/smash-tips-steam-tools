@@ -23,6 +23,15 @@ html
               input#tournament.form-control
         .row
           .col
+            .form-group
+              label(for='state') State
+              select#state.form-control
+                option(value='all' selected) All
+                option(value='pending') Pending
+                option(value='open') Open
+                option(value='complete') Complete
+        .row
+          .col
             button#save.btn.btn-outline-success.mx-auto Save
     script(type='text/javascript' src='../node_modules/jquery/dist/jquery.js' onload='$ = jQuery = module.exports')
     script(type='text/javascript' src='../node_modules/popper.js/dist/umd/popper.js')

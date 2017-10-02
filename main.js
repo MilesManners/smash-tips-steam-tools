@@ -96,7 +96,8 @@ const showError = error => {
 }
 
 class Match {
-  constructor (p1Id, p2Id, winnerId, loserId, round, state) {
+  constructor (id, p1Id, p2Id, winnerId, loserId, round, state) {
+    this.id = id
     this.p1Id = p1Id
     this.p2Id = p2Id
     this.winnerId = winnerId
@@ -108,7 +109,7 @@ class Match {
 
 // Return a list of matches in this format
 // { player1, player2, state, round}
-ipcMain.on('get-matches', (event) => {
+ipcMain.on('get-matches', event => {
   if (!settings || !settings.apiKey || !settings.tournament) {
     event.sender.send('get-matches-reply', {error: true, message: 'Information missing from settings'})
     return
@@ -124,7 +125,7 @@ ipcMain.on('get-matches', (event) => {
       // console.log(rawMatches)
       chApi.participants.index(settings.tournament)
         .then((rawParticipants) => {
-          let matches = rawMatches.map((x) => new Match(x.match.player1_id, x.match.player2_id, x.match.winner_id, x.match.loser_id, x.match.round, x.match.state))
+          let matches = rawMatches.map((x) => new Match(x.match.id, x.match.player1_id, x.match.player2_id, x.match.winner_id, x.match.loser_id, x.match.round, x.match.state))
 
           let participants = {}
           for (let i in rawParticipants) {
@@ -188,7 +189,7 @@ ipcMain.on('show-settings', event => {
   child = new BrowserWindow({
     parent: win,
     width: 400,
-    height: 300,
+    height: 400,
     modal: true,
     autoHideMenuBar: true,
     show: false
@@ -205,4 +206,13 @@ ipcMain.on('save-settings', (event, data) => {
   settings = data
   fs.writeFile('./settings.ini', JSON.stringify(settings))
   child.close()
+})
+
+ipcMain.on('submit-match', (event, match) => {
+  let chApi = new Challonge(settings.apiKey)
+
+  let winner = match.p1Score > match.p2Score ? match.p1Id : match.p2Id
+
+  chApi.matches.update(settings.tournament, match.id, `"${match.p1Score}-${match.p2Score}"`, winner)
+    .then(console.log)
 })

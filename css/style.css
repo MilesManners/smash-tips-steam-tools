@@ -79,4 +79,7 @@ input {
 .mx-auto {
   display: block; }
 
+select option {
+  background: #263238; }
+
 /*# sourceMappingURL=../css/style.css.map */
