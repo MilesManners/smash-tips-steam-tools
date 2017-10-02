@@ -1,5 +1,6 @@
 {
   "name": "stream-tools",
+  "productName": "Stream Tools",
   "version": "0.2.0",
   "description": "smash.tips streaming tools",
   "main": "main.js",
@@ -10,9 +11,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "electron": "^1.6.8",
+    "electron": "^1.8.1",
     "gulp": "^3.9.1",
-    "gulp-bump": "^2.7.0",
+    "gulp-bump": "^2.8.0",
     "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
@@ -20,12 +21,17 @@
     "yargs": "^9.0.1"
   },
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6",
+    "bootstrap": "^4.0.0-beta",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "popper.js": "^1.12.5",
     "pug": "^2.0.0-rc.1",
-    "request": "^2.81.0",
+    "request": "^2.83.0",
     "tether": "^1.4.0"
   },
   "standard": {
-    "globals": ["$"]
+    "globals": [
+      "$"
+    ]
   }
 }

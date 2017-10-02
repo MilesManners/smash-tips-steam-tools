@@ -6,7 +6,7 @@ html
     title Stream Tools
 
     link(rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet' href='../external/font-awesome-4.7.0/css/font-awesome.min.css')
+    link(rel='stylesheet' href='../node_modules/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet' href='../css/slider.css')
     link(rel='stylesheet' href='../css/style.css')
   body
@@ -62,5 +62,7 @@ html
           h1 Matches
           button#settings.btn.btn-outline-secondary: i.fa.fa-lg.fa-cog.float-right
         .slider-content
-    script(type='text/javascript' src='../js/jquery.js' onload='$ = jQuery = module.exports')
+    script(type='text/javascript' src='../node_modules/jquery/dist/jquery.js' onload='$ = jQuery = module.exports')
+    script(type='text/javascript' src='../node_modules/popper.js/dist/umd/popper.js')
+    script(type='text/javascript' src='../node_modules/bootstrap/dist/js/bootstrap.js')
     script(type='text/javascript' src='../js/index.js')

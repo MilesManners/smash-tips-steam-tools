@@ -46,12 +46,16 @@ app.on('ready', () => {
   createWindow()
 
   globalShortcut.register('End', () => {
-    fs.writeFile(`${dir}/player1Score.txt`, ++p1Score)
-    win.webContents.send('increaseP1')
+    if (fs.existsSync(dir)) {
+      fs.writeFile(`${dir}/player1Score.txt`, ++p1Score)
+      win.webContents.send('increaseP1')
+    }
   })
   globalShortcut.register('Down', () => {
-    fs.writeFile(`${dir}/player2Score.txt`, ++p2Score)
-    win.webContents.send('increaseP2')
+    if (fs.existsSync(dir)) {
+      fs.writeFile(`${dir}/player2Score.txt`, ++p2Score)
+      win.webContents.send('increaseP2')
+    }
   })
 })
 
@@ -73,7 +77,9 @@ app.on('activate', () => {
 })
 
 ipcMain.on('save-form', (event, match) => {
-  if (!fs.existsSync(dir)) { fs.mkdirSync(dir) }
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir)
+  }
 
   // fs.writeFile(`${dir}/commentators.txt`, `Commentary\n${match.c1Name}\n${match.c2Name}`)
   fs.writeFile(`${dir}/round.txt`, `${match.roundLeft} ${match.roundRight}`)
@@ -184,6 +190,7 @@ ipcMain.on('show-settings', event => {
     width: 400,
     height: 300,
     modal: true,
+    autoHideMenuBar: true,
     show: false
   })
   child.loadURL(`file://${__dirname}/html/settings.html`)
