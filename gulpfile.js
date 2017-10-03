@@ -4,7 +4,16 @@ const sass = require('gulp-sass')
 const pug = require('gulp-pug')
 const sourcemaps = require('gulp-sourcemaps')
 const bump = require('gulp-bump')
+const zip = require('gulp-zip')
+const fs = require('fs')
+const path = require('path')
+const cp = require('child_process')
 const args = require('yargs').argv
+const packageJson = require('./package.json')
+
+function getFolders (dir) {
+  return fs.readdirSync(dir).filter(file => fs.statSync(path.join(dir, file)).isDirectory())
+}
 
 gulp.task('sass', () => {
   return gulp.src('./css/sass/*.@(sass|scss)')
@@ -69,8 +78,28 @@ gulp.task('bump', () => {
     .pipe(gulp.dest('./'))
 })
 
-gulp.task('watch', ['sass:watch', 'pug:watch'])
+gulp.task('electron', () => {
+  const appName = packageJson.name
+  const electronVer = `v${packageJson.devDependencies.electron.match(/\^(\d.*)/)[1]}`
+  const appVer = packageJson.version
 
-gulp.task('default', ['sass', 'pug'])
+  return cp.exec(`electron-packager . ${appName} --build-version ${appVer} --electronVer ${electronVer} --out ./dist`)
+})
 
-gulp.task('dist', ['bump', 'sass', 'pug'])
+gulp.task('zip', () => {
+  return Promise.all(getFolders('./dist').map(folder => {
+    return new Promise((resolve, reject) =>
+      gulp.src(`./dist/${folder}/*`)
+        .pipe(zip(`${folder}.zip`))
+        .on('error', reject)
+        .pipe(gulp.dest('./dist'))
+        .on('end', resolve)
+  )
+  }))
+})
+
+gulp.task('watch', gulp.parallel('sass:watch', 'pug:watch'))
+
+gulp.task('default', gulp.parallel('sass', 'pug'))
+
+gulp.task('dist', gulp.series('bump', 'sass', 'pug', 'electron', 'zip'))

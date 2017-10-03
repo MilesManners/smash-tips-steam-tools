@@ -212,7 +212,8 @@ ipcMain.on('submit-match', (event, match) => {
   let chApi = new Challonge(settings.apiKey)
 
   let winner = match.p1Score > match.p2Score ? match.p1Id : match.p2Id
+  let score = match.swapped ? `"${match.p1Score}-${match.p2Score}"` : `"${match.p2Score}-${match.p1Score}"`
 
-  chApi.matches.update(settings.tournament, match.id, `"${match.p1Score}-${match.p2Score}"`, winner)
+  chApi.matches.update(settings.tournament, match.id, score, winner)
     .then(console.log)
 })

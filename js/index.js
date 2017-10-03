@@ -65,6 +65,14 @@ $('.slider').on('click', '.match', function () {
   $('.slider').removeClass('is-visible')
 })
 
+// Prevent form submition on enter press
+$('#form').on('keyup keypress', e => {
+  if ((e.keyCode || e.which) === 13) {
+    e.preventDefault()
+    return false
+  }
+})
+
 // Click slider button to open slider
 $('#match-selector').click(e => {
   ipcRenderer.send('get-matches')
@@ -86,6 +94,7 @@ $('#challonge').click(e => {
   if ($('#p1score').val() || $('#p2score').val()) {
     let match = {
       id: $('#form').data('id'),
+      swapped: $('#form').data('swapped'),
       p1Name: $('#p1name').val(),
       p2Name: $('#p2name').val(),
       p1Id: $('#p1name').data('id'),
@@ -110,6 +119,8 @@ $('#swap').click(() => {
   temp = $('#p1name').data('id')
   $('#p1name').data('id', $('#p2name').data('id'))
   $('#p2name').data('id', temp)
+
+  $('#form').data('swapped', !$('#form').data('swapped'))
 })
 
 // Click update to update the text files

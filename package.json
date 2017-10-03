@@ -1,7 +1,7 @@
 {
   "name": "stream-tools",
   "productName": "Stream Tools",
-  "version": "0.2.0",
+  "version": "0.2.4",
   "description": "smash.tips streaming tools",
   "main": "main.js",
   "author": "Miles Manners",
@@ -12,12 +12,14 @@
   },
   "devDependencies": {
     "electron": "^1.8.1",
-    "gulp": "^3.9.1",
+    "electron-packager": "^9.1.0",
+    "gulp": "github:gulpjs/gulp#4.0",
     "gulp-bump": "^2.8.0",
     "gulp-pug": "^3.3.0",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-util": "^3.0.8",
+    "gulp-zip": "^4.0.0",
     "yargs": "^9.0.1"
   },
   "dependencies": {
@@ -26,8 +28,7 @@
     "jquery": "^3.2.1",
     "popper.js": "^1.12.5",
     "pug": "^2.0.0-rc.1",
-    "request": "^2.83.0",
-    "tether": "^1.4.0"
+    "request": "^2.83.0"
   },
   "standard": {
     "globals": [
