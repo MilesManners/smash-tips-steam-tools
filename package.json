@@ -1,7 +1,7 @@
 {
   "name": "stream-tools",
   "productName": "Stream Tools",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "smash.tips streaming tools",
   "main": "main.js",
   "author": "Miles Manners",
