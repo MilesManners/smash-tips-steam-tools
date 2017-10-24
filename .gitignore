@@ -1,3 +1,7 @@
+streamFiles
+settings.ini
+*.jar
+
 # Logs
 logs
 *.log
