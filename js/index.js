@@ -52,7 +52,7 @@ $('.slider').on('click', '.match', function () {
 
   $('#form').data('id', match)
 
-  $('#p1name').val(p1name)``
+  $('#p1name').val(p1name)
   $('#p2name').val(p2name)
 
   $('#p1name').data('id', p1Id)
