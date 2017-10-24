@@ -122,7 +122,6 @@ ipcMain.on('get-matches', event => {
 
   chApi.matches.index(settings.tournament, 'all')
     .then((rawMatches) => {
-      // console.log(rawMatches)
       chApi.participants.index(settings.tournament)
         .then((rawParticipants) => {
           let matches = rawMatches.map((x) => new Match(x.match.id, x.match.player1_id, x.match.player2_id, x.match.winner_id, x.match.loser_id, x.match.round, x.match.state))
@@ -212,7 +211,7 @@ ipcMain.on('submit-match', (event, match) => {
   let chApi = new Challonge(settings.apiKey)
 
   let winner = match.p1Score > match.p2Score ? match.p1Id : match.p2Id
-  let score = match.swapped ? `"${match.p1Score}-${match.p2Score}"` : `"${match.p2Score}-${match.p1Score}"`
+  let score = match.swapped ? `"${match.p2Score}-${match.p1Score}"` : `"${match.p1Score}-${match.p2Score}"`
 
   chApi.matches.update(settings.tournament, match.id, score, winner)
     .then(console.log)

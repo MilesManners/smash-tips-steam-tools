@@ -44,11 +44,11 @@ gulp.task('pug-debug', () => {
 })
 
 gulp.task('sass:watch', () => {
-  gulp.watch('./css/sass/*.@(sass|scss)', ['sass'])
+  gulp.watch('./css/sass/*.@(sass|scss)', gulp.series('sass'))
 })
 
 gulp.task('pug:watch', () => {
-  gulp.watch('./html/pug/*.pug', ['pug'])
+  gulp.watch('./html/pug/*.pug', gulp.series('pug'))
 })
 
 gulp.task('bump', () => {

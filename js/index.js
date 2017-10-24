@@ -52,11 +52,14 @@ $('.slider').on('click', '.match', function () {
 
   $('#form').data('id', match)
 
-  $('#p1name').val(p1name)
+  $('#p1name').val(p1name)``
   $('#p2name').val(p2name)
 
   $('#p1name').data('id', p1Id)
   $('#p2name').data('id', p2Id)
+
+  $('#p1score').val(0)
+  $('#p2score').val(0)
 
   let round = $(this).find('.roundLabel').text().split(' ')
   $('#round-left').val(round.shift())
@@ -119,6 +122,10 @@ $('#swap').click(() => {
   temp = $('#p1name').data('id')
   $('#p1name').data('id', $('#p2name').data('id'))
   $('#p2name').data('id', temp)
+
+  temp = $('#p1score').val()
+  $('#p2score').val($('#p2score').val())
+  $('#p2score').val(temp)
 
   $('#form').data('swapped', !$('#form').data('swapped'))
 })
