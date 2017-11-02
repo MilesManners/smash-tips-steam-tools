@@ -83,7 +83,7 @@ gulp.task('electron', () => {
   const electronVer = `v${packageJson.devDependencies.electron.match(/\^(\d.*)/)[1]}`
   const appVer = packageJson.version
 
-  return cp.exec(`electron-packager . ${appName} --build-version ${appVer} --electronVer ${electronVer} --out ./dist`)
+  return cp.exec(`electron-packager . ${appName}-${appVer} --build-version ${appVer} --electronVer ${electronVer} --out ./dist`)
 })
 
 gulp.task('zip', () => {

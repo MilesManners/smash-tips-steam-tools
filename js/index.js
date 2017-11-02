@@ -2,6 +2,12 @@ const { ipcRenderer } = require('electron')
 const pug = require('pug')
 require('bootstrap')
 
+ipcRenderer.send('get-version')
+
+ipcRenderer.on('get-version-reply', (event, response) => {
+  document.title = `Stream Tools ${response}`
+})
+
 ipcRenderer.on('get-matches-reply', (event, response) => {
   let matches = $('.slider-content')
   matches.empty()

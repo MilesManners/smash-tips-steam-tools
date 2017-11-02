@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain, globalShortcut} = require('electron')
 const fs = require('fs')
 const Challonge = require('./js/challonge.js')
+const package = require('./package.json')
 
 let p1Score = 0
 let p2Score = 0
@@ -74,6 +75,10 @@ app.on('activate', () => {
   if (win === null) {
     createWindow()
   }
+})
+
+ipcMain.on('get-version', event => {
+  event.sender.send('get-version-reply', package.version)
 })
 
 ipcMain.on('save-form', (event, match) => {
