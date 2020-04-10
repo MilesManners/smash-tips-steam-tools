@@ -11,7 +11,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
-    "electron": "^1.8.1",
+    "electron": "^1.8.8",
     "electron-packager": "^9.1.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-bump": "^2.8.0",
